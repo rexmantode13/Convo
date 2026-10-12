@@ -2,8 +2,8 @@ const socket = io();
 
 // State
 let me = null;
-let users = []; // array of {id, name}
-let chats = {}; // otherId -> { messages: [], unread: 0, isTyping: false }
+let users = []; 
+let chats = {}; 
 let currentChat = null;
 let typingTimeout = null;
 
