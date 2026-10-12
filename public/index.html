@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Convo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Screen 0: Welcome -->
+        <section id="welcome-screen" class="screen">
+            <div class="welcome-content">
+                <h1 class="logo">Convo</h1>
+                <p class="tagline">Pick a name and start chatting</p>
+                <div class="input-group">
+                    <input type="text" id="name-input" placeholder="Your name" autocomplete="off" maxlength="20">
+                    <div id="name-error" class="error"></div>
+                </div>
+                <button id="start-btn" class="pill-btn primary">Start chatting</button>
+            </div>
+            <div class="welcome-footer">Messages are not stored. They disappear when either of you closes the tab.</div>
+        </section>
+
+        <!-- Screen 1: Chat List -->
+        <section id="list-screen" class="screen hidden">
+            <header class="list-header">
+                <div class="header-titles">
+                    <div class="hello-text">Hello,</div>
+                    <div class="my-name" id="my-name-display">Name</div>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn" id="search-btn">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    </button>
+                    <button class="icon-btn" id="menu-btn">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                        <div class="menu-dropdown hidden" id="menu-dropdown">
+                            <div class="menu-item" id="leave-chat-item">Leave chat</div>
+                        </div>
+                    </button>
+                </div>
+            </header>
+
+            <div class="tab-bar">
+                <button class="tab active" data-tab="all">All Chats</button>
+                <button class="tab" data-tab="groups">Groups</button>
+                <button class="tab" data-tab="contacts">Contacts</button>
+            </div>
+
+            <div class="tab-content" id="tab-all">
+                <div class="empty-state" id="empty-all">No chats yet. Tap + to see who's online.</div>
+                <div class="chat-list" id="chat-list-all"></div>
+            </div>
+            
+            <div class="tab-content hidden" id="tab-groups">
+                <div class="empty-state">Groups coming soon</div>
+            </div>
+
+            <div class="tab-content hidden" id="tab-contacts">
+                <div class="empty-state" id="empty-contacts">No one else is online right now.</div>
+                <div class="chat-list" id="chat-list-contacts"></div>
+            </div>
+
+            <button class="fab" id="fab-btn">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="white" stroke-width="2" fill="none"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+        </section>
+
+        <!-- Screen 2: Conversation -->
+        <section id="chat-screen" class="screen hidden">
+            <header class="chat-header">
+                <button class="icon-btn back-btn" id="back-btn">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                </button>
+                <div class="chat-contact-info">
+                    <div class="avatar-container">
+                        <div class="avatar" id="chat-avatar"></div>
+                        <div class="online-dot"></div>
+                    </div>
+                    <div class="chat-contact-titles">
+                        <div class="chat-name" id="chat-name">Name</div>
+                        <div class="chat-status" id="chat-status">Online</div>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+                    </button>
+                    <button class="icon-btn">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    </button>
+                </div>
+                <div class="header-cutout"></div>
+            </header>
+            <div class="chat-top-note">Messages are not stored. They disappear when either of you closes the tab.</div>
+            <div class="messages-area" id="messages-area"></div>
+            <div class="input-area">
+                <div class="input-bar">
+                    <button class="icon-btn muted">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                    </button>
+                    <input type="text" id="message-input" placeholder="Message..." autocomplete="off">
+                    <button class="icon-btn muted">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
+                    </button>
+                </div>
+                <button class="send-btn" id="send-btn">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Notice overlay -->
+    <div id="notice-overlay" class="overlay hidden">
+        <div class="notice-card">
+            <p id="notice-text"></p>
+            <button id="notice-btn" class="pill-btn primary small">OK</button>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
