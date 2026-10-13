@@ -69,7 +69,7 @@ The `render.yaml` file is configured for deployment on Render.com. Simply push t
 ## Usage
 
 1. Open the application in a browser
-2. Enter a username (2-20 characters)
+2. Enter a username ( 2 - 20 characters)
 3. See other online users in the contacts list
 4. Click on a user to start a private chat
 5. Send messages in real-time
